@@ -1,0 +1,16 @@
+version: "3.9"
+services:
+  eset_integration:
+    build: .
+    env_file: .env
+    environment:
+      USERNAME_INTEGRATION: ${USERNAME_INTEGRATION}
+      PASSWORD_INTEGRATION: ${PASSWORD_INTEGRATION}
+      EP_INSTANCE: ${EP_INSTANCE}
+      EI_INSTANCE: ${EI_INSTANCE}
+      ECOS_INSTANCE: ${ECOS_INSTANCE}
+      INTERVAL: ${INTERVAL}
+      INSTANCE_REGION: ${INSTANCE_REGION}
+    volumes:
+      - ./last_detection_time.yml:/eset_integration/last_detection_time.yml
+      - /var/log/eset_integration.log:/eset_integration/eset_integration.log
