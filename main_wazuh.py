@@ -5,7 +5,7 @@ import time
 from integration.main import ServiceClient
 from integration.models import Config
 
-from utils_wazuh import LastDetectionTimeHandlerWazuh, TransformerDetectionsWazuh
+from utils_wazuh import LastDataTimeHandlerWazuh, TransformerDataWazuh
 
 
 class ServiceClientWazuh(ServiceClient):
@@ -13,16 +13,17 @@ class ServiceClientWazuh(ServiceClient):
         super().__init__()
 
     def _get_config(self) -> Config:
-        return Config("Wazuh", "1.0.1")
+        return Config("Wazuh", "1.2.0")
 
-    def _get_transformer_detections(self) -> TransformerDetectionsWazuh:
-        return TransformerDetectionsWazuh(self.env_vars)
+    def _get_transformer_data(self) -> TransformerDataWazuh:
+        return TransformerDataWazuh(self.env_vars)
 
-    def _get_last_detection_time_handler(self, data_source: str) -> LastDetectionTimeHandlerWazuh:
-        return LastDetectionTimeHandlerWazuh(data_source, self.env_vars.interval)
+    def _get_last_data_time_handler(self, data_source: str) -> LastDataTimeHandlerWazuh:
+        return LastDataTimeHandlerWazuh(data_source, self.env_vars.interval)
 
 
 async def main() -> None:
+    logging.Formatter.converter = time.gmtime
     logging.basicConfig(
         format="%(asctime)s - %(levelname)s - %(message)s", level=logging.INFO, datefmt="%Y-%m-%d %H:%M:%S"
     )

@@ -93,6 +93,26 @@
     <group>gdpr_IV_35.7.d,gpg13_4.12,hipaa_164.312.a.1,nist_800_53_SC.7,pci_dss_1.4,system_error,tsc_CC6.7,tsc_CC6.8,</group>
   </rule>
 
+  <rule id="420131" level="3">
+    <if_sid>420010</if_sid>
+    <field name="eset.severity">^INCIDENT_SEVERITY_LEVEL_LOW$</field>
+    <description>ESET: Low severity incident.</description>
+  </rule>
+
+  <rule id="420132" level="7">
+    <if_sid>420010</if_sid>
+    <field name="eset.severity">^INCIDENT_SEVERITY_LEVEL_MEDIUM$</field>
+    <description>ESET: Medium severity incident.</description>
+    <group>gdpr_IV_35.7.d,gpg13_4.12,hipaa_164.312.a.1,nist_800_53_SC.7,pci_dss_1.4,system_error,tsc_CC6.7,tsc_CC6.8,</group>
+  </rule>
+
+  <rule id="420133" level="12">
+    <if_sid>420010</if_sid>
+    <field name="eset.severity">^INCIDENT_SEVERITY_LEVEL_HIGH$</field>
+    <description>ESET: High severity incident.</description>
+    <group>gdpr_IV_35.7.d,gpg13_4.12,hipaa_164.312.a.1,nist_800_53_SC.7,pci_dss_1.4,system_error,tsc_CC6.7,tsc_CC6.8,</group>
+  </rule>
+
   <rule id="420140" level="4">
     <if_sid>420010</if_sid>
     <description>ESET EDR rule: Active Setup autostart registry modified by an unpopular process [A0100].</description>
