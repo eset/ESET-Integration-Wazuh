@@ -1,0 +1,19 @@
+<!--
+  Custom Decoder for ESET Protect On-Premise Syslog (JSON format)
+  
+  ESET Protect On-Prem sends RFC 5424 syslog with JSON payload.
+  Wazuh expects RFC 3164, so the standard pre-decoder cannot extract program_name correctly.
+  This decoder uses pcre2 regex to match the ERAServer program name and extract the JSON
+  payload using the built-in JSON_Decoder plugin.
+
+  Installation: /var/ossec/etc/decoders/local_decoder.xml
+-->
+<decoder name="eset-protect-syslog">
+  <prematch type="pcre2">ERAServer</prematch>
+</decoder>
+
+<decoder name="eset-protect-syslog-json">
+  <parent>eset-protect-syslog</parent>
+  <prematch type="pcre2">ERAServer[^{]+</prematch>
+  <plugin_decoder offset="after_prematch">JSON_Decoder</plugin_decoder>
+</decoder>
