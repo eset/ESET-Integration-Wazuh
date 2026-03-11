@@ -3,7 +3,7 @@ import logging
 import time
 
 from integration.main import ServiceClient
-from integration.models import Config
+from integration.models import Config, DataSource
 
 from utils_wazuh import LastDataTimeHandlerWazuh, TransformerDataWazuh
 
@@ -13,12 +13,12 @@ class ServiceClientWazuh(ServiceClient):
         super().__init__()
 
     def _get_config(self) -> Config:
-        return Config("Wazuh", "1.2.0")
+        return Config("Wazuh", "1.3.0")
 
     def _get_transformer_data(self) -> TransformerDataWazuh:
         return TransformerDataWazuh(self.env_vars)
 
-    def _get_last_data_time_handler(self, data_source: str) -> LastDataTimeHandlerWazuh:
+    def _get_last_data_time_handler(self, data_source: DataSource) -> LastDataTimeHandlerWazuh:
         return LastDataTimeHandlerWazuh(data_source, self.env_vars.interval)
 
 
